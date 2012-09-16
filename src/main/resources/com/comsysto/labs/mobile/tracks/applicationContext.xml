@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/data/mongo
+    http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <mvc:annotation-driven />
+
+    <context:component-scan base-package="com.comsysto.labs.mobile.tracks.rest" />
+
+    <!-- Multipart-Resolver for track uploads -->
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="300000"/><!-- Max size in bytes. -->
+    </bean>
+
+    <!-- MongoDB Config -->
+
+    <mongo:mongo id="mongo"/> <!-- defaults: host="127.0.0.1" port="27017"-->
+
+    <bean id="tracksTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg ref="mongo"/>
+        <constructor-arg name="databaseName" value="tracks"/>
+    </bean>
+
+    <bean id="userTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg ref="mongo"/>
+        <constructor-arg name="databaseName" value="user"/>
+    </bean>
+
+
+
+</beans>

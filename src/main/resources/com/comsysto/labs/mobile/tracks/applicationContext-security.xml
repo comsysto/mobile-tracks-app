@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <debug/>
+
+    <global-method-security pre-post-annotations="enabled"/>
+
+    <http pattern="index.jsp" security="none"/>
+
+    <http use-expressions="true">
+        <intercept-url pattern="/secure/**" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/services/**" access="hasRole('ROLE_USER')"/>
+
+        <form-login login-page="/index.jsp" authentication-failure-url="/index.jsp?fail" default-target-url="/secure/index.html"/>
+        <logout logout-success-url="/index.jsp?loggedout" delete-cookies="JSESSIONID"/>
+        <!--<remember-me/>-->
+
+        <session-management invalid-session-url="/index.jsp?invalidSession">
+            <concurrency-control max-sessions="1" error-if-maximum-exceeded="true"/>
+        </session-management>
+
+    </http>
+
+    <beans:bean id="encoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder"/>
+
+    <authentication-manager>
+        <authentication-provider>
+            <password-encoder ref="encoder"/>
+            <user-service>
+                <user name="joe@joe.com"
+                      password="1b1953c24a7666a31a6df82bd471fda59d05e00ccbe2c572039bc252952b4c9f7c49e3848776bf57"
+                      authorities="ROLE_USER"/>
+                <user name="scott@scott.com"
+                      password="130d08d3ebadd6ffc93cf4fd4152266c46de8c38cc6c8cb775f746ff909a1823c48618ca1c8dc414"
+                      authorities="ROLE_USER"/>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+</beans:beans>
