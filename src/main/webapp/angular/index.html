@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="csTracksApp">
+<head>
+    <meta charset="utf-8">
+    <title>cS AngularJS Tracks App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#">cS AngularJS Tracks App</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="active"><a href="#/home">Home</a></li>
+                    <li><a href="#/tracks">Tracks</a></li>
+                    <li><a href="http://comsysto.com/jobs.html" target="_blank">We are hiring!</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+
+<div class="container" ng-view>
+
+    Loading ....
+
+</div>
+
+<script src="js/jquery-2.0.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
